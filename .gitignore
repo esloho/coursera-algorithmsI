@@ -1,0 +1,13 @@
+# ignore project files from Eclipse
+.project
+.classpath
+.settings/
+.metadata
+
+RemoteSystemsTempFiles
+
+# ignore binaries
+bin/
+
+# ignore generated zip deliverables
+*.zip
