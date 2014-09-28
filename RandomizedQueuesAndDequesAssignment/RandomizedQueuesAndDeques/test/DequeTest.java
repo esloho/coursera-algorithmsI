@@ -1,7 +1,6 @@
 import java.util.Iterator;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -18,13 +17,6 @@ public class DequeTest {
     private static final int ITEM2 = 5;
     private static final int ITEM3 = 6;
     private Deque<Integer> deque;
-
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-    }
 
     /**
      * Test method for {@link Deque#Deque()}.
