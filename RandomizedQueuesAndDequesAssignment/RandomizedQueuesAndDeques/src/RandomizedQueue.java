@@ -20,6 +20,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
      */
     public RandomizedQueue() {
         queue = (Item[]) new Object[2];
+        size = 0;
     }
 
     /**
