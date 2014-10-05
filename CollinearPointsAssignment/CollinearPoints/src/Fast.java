@@ -1,5 +1,13 @@
 import java.util.Arrays;
 
+/**
+ * Given a point p, the following method determines whether p participates in a
+ * set of 4 or more collinear points. The order of growth of the running time is
+ * N2 log N in the worst case and it uses space proportional to N.
+ * 
+ * @author esloho
+ *
+ */
 public class Fast {
 
     /**

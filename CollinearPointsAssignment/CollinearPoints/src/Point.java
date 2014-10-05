@@ -107,8 +107,7 @@ public class Point implements Comparable<Point> {
         return slope;
     }
 
-    // Some unit test
     public static void main(String[] args) {
-
+        // requested by the course API
     }
 }

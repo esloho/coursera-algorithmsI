@@ -1,5 +1,15 @@
 import java.util.Arrays;
 
+/**
+ * Examines 4 points at a time and checks whether they all lie on the same line
+ * segment, printing out any such line segments to standard output and drawing
+ * them using standard drawing. To check whether the 4 points p, q, r, and s are
+ * collinear, checks whether the slopes between p and q, between p and r, and
+ * between p and s are all equal.
+ * 
+ * @author esloho
+ *
+ */
 public class Brute {
 
     /**
