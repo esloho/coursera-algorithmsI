@@ -1,6 +1,5 @@
 public class Board {
 
-    // private final int[][] blocks2D;
     private final int[] blocks;
     private final int dimension;
     private final int size;
@@ -12,7 +11,6 @@ public class Board {
      * @param blocks2D
      */
     public Board(int[][] b) {
-        // blocks2D = b;
         dimension = b.length;
         size = dimension * dimension;
 
@@ -92,20 +90,6 @@ public class Board {
      * @return
      */
     public boolean isGoal() {
-        // // If any block has a different value than the expected: is not the
-        // goal
-        // for (int row = 0; row < dimension; row++) {
-        // for (int column = 0; column < dimension; column++) {
-        // if (blocks2D[row][column] != row * dimension + column + 1) {
-        // // The last block has to be different (=0)
-        // if (row < dimension - 1 && column < dimension - 1) {
-        // return false;
-        // }
-        // }
-        //
-        // }
-        // }
-
         // If any block has a different value than the expected: is not the goal
         for (int i = 0; i < size; i++) {
             // The last block has to be different (=0)
@@ -124,36 +108,6 @@ public class Board {
      * @return
      */
     public Board twin() {
-        // int[][] twinBlocks = new int[dimension][dimension];
-        //
-        // // First copy all the blocks as in the original board
-        // for (int row = 0; row < dimension; row++) {
-        // for (int column = 0; column < dimension; column++) {
-        // twinBlocks[row][column] = blocks2D[row][column];
-        // }
-        // }
-        //
-        // // Exchange the 2 first blocks in the twin
-        // int first = twinBlocks[0][0];
-        // twinBlocks[0][0] = twinBlocks[0][1];
-        // twinBlocks[0][1] = first;
-
-        // --------------------
-
-        // int[] twinBlocks = new int[size];
-        //
-        // // First copy all the blocks as in the original board
-        // for (int i = 0; i < size; i++) {
-        // twinBlocks[i] = blocks[i];
-        // }
-        //
-        // // Exchange the 2 first blocks in the twin
-        // int first = twinBlocks[0];
-        // twinBlocks[0] = twinBlocks[1];
-        // twinBlocks[1] = first;
-        //
-        // return new Board(twinBlocks, dimension);
-
         return getNeighbor(0, 1);
     }
 
@@ -194,15 +148,6 @@ public class Board {
 
         Board that = (Board) y;
 
-        // // If at any block they 2 boards have different value: not equals
-        // for (int row = 0; row < dimension; row++) {
-        // for (int column = 0; column < dimension; column++) {
-        // if (blocks2D[row][column] != that.blocks2D[row][column]) {
-        // return false;
-        // }
-        // }
-        // }
-
         // If at any block they 2 boards have different value: not equals
         for (int i = 0; i < size; i++) {
             if (blocks[i] != that.blocks[i]) {
@@ -220,9 +165,6 @@ public class Board {
      */
     public Iterable<Board> neighbors() {
         // Locate block with value 0
-        // Exchange this block with the neighbors
-        // Contemplate extreme cases (e.g. row >= dimension)
-
         int pos0 = 0;
 
         for (int i = 0; i < size; i++) {
@@ -268,7 +210,6 @@ public class Board {
         s.append(dimension + "\n");
         for (int row = 0; row < dimension; row++) {
             for (int column = 0; column < dimension; column++) {
-                // s.append(String.format("%2d ", blocks2D[row][column]));
                 s.append(String
                         .format("%2d ", blocks[row * dimension + column]));
             }

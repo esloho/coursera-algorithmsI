@@ -228,22 +228,15 @@ public class BoardTest {
      */
     @Test
     public final void testNeighbors() {
-        Assert.fail("Not yet implemented"); // TODO
-    }
-
-    /**
-     * Test method for {@link Board#neighbors()}.
-     */
-    @Test
-    public final void testNeighborsNumber() {
         int[][] exampleAssignment = new int[][] { { 8, 1, 3 }, { 4, 0, 2 },
                 { 7, 6, 5 } };
         Board boardAssignment = new Board(exampleAssignment);
 
         int numberNeighbors = 0;
-
+        System.out.println("Neighbors of example board:\n");
         for (Board b : boardAssignment.neighbors()) {
             numberNeighbors++;
+            System.out.println(b.toString() + "\n");
         }
         Assert.assertEquals(4, numberNeighbors);
 
@@ -257,9 +250,10 @@ public class BoardTest {
         board = new Board(blocks2D);
 
         numberNeighbors = 0;
-
+        System.out.println("Neighbors of goal board:\n");
         for (Board b : board.neighbors()) {
             numberNeighbors++;
+            System.out.println(b.toString() + "\n");
         }
         Assert.assertEquals(2, numberNeighbors);
     }

@@ -84,6 +84,9 @@ public class Solver {
             minSN = priorityQueue.delMin();
         }
 
+        System.out.println("SOlution found:\n");
+        minSN.board.toString();
+
         // The puzzle is solvable only if the goal board was generated through
         // the original initial board and not its twin.
         if (minSN.board == gameTree.board) {
@@ -106,11 +109,19 @@ public class Solver {
         for (Board n : dequeued.board.neighbors()) {
             // Critical optimization: don't insert the neighbor that is equal to
             // the previous search node
-            if (!dequeued.previousNode.board.equals(n)) {
+            if (!isRepeated(dequeued, n)) {
                 priorityQueue.insert(new SearchNode(n, dequeued,
                         dequeued.moves + 1));
             }
         }
+    }
+
+    private boolean isRepeated(SearchNode dequeued, Board board) {
+        if (dequeued.previousNode == null) {
+            return false;
+        }
+
+        return dequeued.previousNode.board.equals(board);
     }
 
     /**
