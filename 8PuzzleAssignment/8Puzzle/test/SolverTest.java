@@ -1,5 +1,4 @@
-import static org.junit.Assert.*;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +24,7 @@ public class SolverTest {
      */
     @Test
     public final void testSolver() {
-        fail("Not yet implemented"); // TODO
+        Assert.fail("Not yet implemented"); // TODO
     }
 
     /**
@@ -33,7 +32,7 @@ public class SolverTest {
      */
     @Test
     public final void testIsSolvable() {
-        fail("Not yet implemented"); // TODO
+        Assert.fail("Not yet implemented"); // TODO
     }
 
     /**
@@ -41,7 +40,7 @@ public class SolverTest {
      */
     @Test
     public final void testMoves() {
-        fail("Not yet implemented"); // TODO
+        Assert.fail("Not yet implemented"); // TODO
     }
 
     /**
@@ -49,7 +48,7 @@ public class SolverTest {
      */
     @Test
     public final void testSolution() {
-        fail("Not yet implemented"); // TODO
+        Assert.fail("Not yet implemented"); // TODO
     }
 
 }
