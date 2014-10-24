@@ -49,7 +49,7 @@ public class BoardTest {
 
         board = new Board(blocks2D);
 
-        Assert.assertEquals(0, board.hamming()); // TODO
+        Assert.assertEquals(0, board.hamming());
     }
 
     /**
@@ -66,7 +66,7 @@ public class BoardTest {
 
         board = new Board(blocks2D);
 
-        Assert.assertEquals((N * N - 1), board.hamming()); // TODO
+        Assert.assertEquals((N * N - 1), board.hamming());
     }
 
     /**
@@ -162,7 +162,7 @@ public class BoardTest {
         blocks2D[0][0] = 1;
         blocks2D[0][1] = 0;
 
-        Assert.assertEquals(toString(blocks2D, N), twin.toString()); // TODO
+        Assert.assertEquals(toString(blocks2D, N), twin.toString());
     }
 
     /**
@@ -191,7 +191,7 @@ public class BoardTest {
         board = new Board(blocks2D);
         Board equalBoard = new Board(equalBlocks);
 
-        Assert.assertTrue(board.equals(equalBoard)); // TODO
+        Assert.assertTrue(board.equals(equalBoard));
     }
 
     /**
@@ -220,7 +220,7 @@ public class BoardTest {
         board = new Board(blocks2D);
         Board equalBoard = new Board(equalBlocks);
 
-        Assert.assertFalse(board.equals(equalBoard)); // TODO
+        Assert.assertFalse(board.equals(equalBoard));
     }
 
     /**

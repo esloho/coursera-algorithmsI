@@ -1,8 +1,7 @@
 public class Solver {
 
     private final SearchNode gameTree;
-    private final SearchNode twinTree;
-    private MinPQ<SearchNode> priorityQueue;
+    private final MinPQ<SearchNode> priorityQueue;
     private final SearchNode solution;
 
     private class SearchNode implements Comparable<SearchNode> {
@@ -11,14 +10,14 @@ public class Solver {
         private final int moves;
 
         // Constructs a SearchNode
-        public SearchNode(Board b, SearchNode previous, int m) {
+        public SearchNode(final Board b, final SearchNode previous, final int m) {
             this.board = b;
             this.previousNode = previous;
             this.moves = m;
         }
 
         // Overrides the natural order comparison
-        public int compareTo(SearchNode that) {
+        public int compareTo(final SearchNode that) {
             if (this.board.manhattan() + this.moves < that.board.manhattan()
                     + that.moves) {
                 return -1;
@@ -54,11 +53,9 @@ public class Solver {
      * 
      * @param initial
      */
-    public Solver(Board initial) {
+    public Solver(final Board initial) {
         gameTree = new SearchNode(initial, null, 0);
         priorityQueue = new MinPQ<SearchNode>();
-
-        twinTree = new SearchNode(initial.twin(), null, 0);
 
         // If the initial board is the goal, work is done
         if (initial.isGoal()) {
@@ -66,6 +63,7 @@ public class Solver {
         } else {
             // Insert initial search node and its twin
             priorityQueue.insert(gameTree);
+            final SearchNode twinTree = new SearchNode(initial.twin(), null, 0);
             priorityQueue.insert(twinTree);
             solution = solveBoard();
         }
@@ -84,18 +82,28 @@ public class Solver {
             minSN = priorityQueue.delMin();
         }
 
-        System.out.println("SOlution found:\n");
-        minSN.board.toString();
-
         // The puzzle is solvable only if the goal board was generated through
         // the original initial board and not its twin.
-        if (minSN.board == gameTree.board) {
+        if (isGameTree(minSN)) {
             solved = minSN;
         } else {
             solved = null;
         }
 
         return solved;
+    }
+    
+    
+    private boolean isGameTree(final SearchNode node) {
+        // Copy to a new variable to avoid modification of the parameter 
+        // (so course's checkstyle stop complaining)
+        SearchNode current = node;
+        
+        while (current.previousNode != null) {
+            current = current.previousNode;
+        }
+        
+        return current.board == gameTree.board;
     }
 
     /**
@@ -104,7 +112,7 @@ public class Solver {
      * 
      * @param current
      */
-    private void insertNeighborsInPQ(SearchNode dequeued) {
+    private void insertNeighborsInPQ(final SearchNode dequeued) {
 
         for (Board n : dequeued.board.neighbors()) {
             // Critical optimization: don't insert the neighbor that is equal to
@@ -116,7 +124,7 @@ public class Solver {
         }
     }
 
-    private boolean isRepeated(SearchNode dequeued, Board board) {
+    private boolean isRepeated(final SearchNode dequeued, final Board board) {
         if (dequeued.previousNode == null) {
             return false;
         }
@@ -139,6 +147,10 @@ public class Solver {
      * @return
      */
     public int moves() {
+        if (solution == null) {
+            return -1;
+        }
+        
         return solution.moves + solution.board.manhattan();
     }
 
@@ -148,11 +160,16 @@ public class Solver {
      * @return
      */
     public Iterable<Board> solution() {
-        // create a stack and put the solution board, then the previous one,
-        // etc.
-        Stack<Board> solutionPath = new Stack<Board>();
+        
+        if (solution == null) {
+            return null;
+        }
+        
+        // Create an Iterable (stack)
+        final Stack<Board> solutionPath = new Stack<Board>();
         SearchNode current = solution;
 
+        // Push boards in reverse order (from solution to the initial)
         while (current != null) {
             solutionPath.push(current.board);
             current = current.previousNode;

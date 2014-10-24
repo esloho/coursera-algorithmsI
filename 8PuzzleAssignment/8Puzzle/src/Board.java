@@ -10,7 +10,7 @@ public class Board {
      * 
      * @param blocks2D
      */
-    public Board(int[][] b) {
+    public Board(final int[][] b) {
         dimension = b.length;
         size = dimension * dimension;
 
@@ -23,10 +23,10 @@ public class Board {
         }
     }
 
-    private Board(int[] b, int dim) {
+    private Board(final int[] b, final int n) {
         blocks = b;
         size = b.length;
-        dimension = dim;
+        dimension = n;
     }
 
     /**
@@ -68,13 +68,13 @@ public class Board {
             // Explore blocks with wrong value excluding the 0
             // Block 0 should contain value 1, etc.
             if ((blocks[i] != i + 1) && (blocks[i] != 0)) {
-                int row = i / dimension;
-                int column = i % dimension;
+                final int row = i / dimension;
+                final int column = i % dimension;
 
-                int value = blocks[i];
+                final int value = blocks[i];
                 // The value 1 should be at block 0, etc.
-                int expectedRow = (value - 1) / dimension;
-                int expectedColumn = (value - 1) % dimension;
+                final int expectedRow = (value - 1) / dimension;
+                final int expectedColumn = (value - 1) % dimension;
 
                 manhattan += Math.abs(expectedRow - row)
                         + Math.abs(expectedColumn - column);
@@ -108,7 +108,16 @@ public class Board {
      * @return
      */
     public Board twin() {
-        return getNeighbor(0, 1);
+        // Find two adjacent blocks different from the empty one (=0)
+        int i = 0;
+        int j = 1;
+        
+        // If the 0 is in the first row, then get blocks from the last one
+        if (blocks[i] == 0 || blocks[j] == 0) {
+            i = size - 2;
+            j = size - 1;
+        }
+        return getNeighbor(i, j);
     }
 
     /**
@@ -119,8 +128,8 @@ public class Board {
      * @param pos2
      * @return
      */
-    private Board getNeighbor(int pos1, int pos2) {
-        int[] newBlocks = new int[size];
+    private Board getNeighbor(final int pos1, final int pos2) {
+        final int[] newBlocks = new int[size];
 
         // First copy all the blocks as in the original board
         for (int i = 0; i < size; i++) {
@@ -128,7 +137,7 @@ public class Board {
         }
 
         // Exchange the 2 first blocks in the twin
-        int aux = newBlocks[pos1];
+        final int aux = newBlocks[pos1];
         newBlocks[pos1] = newBlocks[pos2];
         newBlocks[pos2] = aux;
 
@@ -138,7 +147,7 @@ public class Board {
     /**
      * Does this board equal y?
      */
-    public boolean equals(Object y) {
+    public boolean equals(final Object y) {
         if (y == this)
             return true;
         if (y == null)
@@ -146,7 +155,7 @@ public class Board {
         if (y.getClass() != this.getClass())
             return false;
 
-        Board that = (Board) y;
+        final Board that = (Board) y;
 
         // If at any block they 2 boards have different value: not equals
         for (int i = 0; i < size; i++) {
@@ -174,7 +183,7 @@ public class Board {
             }
         }
 
-        Stack<Board> neighbors = new Stack<Board>();
+        final Stack<Board> neighbors = new Stack<Board>();
 
         final int row = pos0 / dimension;
         final int column = pos0 % dimension;
@@ -206,7 +215,7 @@ public class Board {
      * String representation of this board (given by the assignment)
      */
     public String toString() {
-        StringBuilder s = new StringBuilder();
+        final StringBuilder s = new StringBuilder();
         s.append(dimension + "\n");
         for (int row = 0; row < dimension; row++) {
             for (int column = 0; column < dimension; column++) {
