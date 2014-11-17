@@ -11,9 +11,9 @@ import org.junit.Test;
  */
 public class PointSETTest {
 
+    private static final Point2D POINT1 = new Point2D(1.0, 1.0);
+    private static final Point2D POINT2 = new Point2D(0.2, 0.2);
     private final PointSET pointSET = new PointSET();
-    private final static Point2D POINT1 = new Point2D(1.0, 1.0);
-    private final static Point2D POINT2 = new Point2D(0.2, 0.2);
 
     /**
      * Test method for {@link PointSET#isEmpty()}.

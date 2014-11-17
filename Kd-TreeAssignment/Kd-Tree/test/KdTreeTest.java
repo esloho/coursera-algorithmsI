@@ -11,9 +11,9 @@ import org.junit.Test;
  */
 public class KdTreeTest {
 
+    private static final Point2D POINT1 = new Point2D(1.0, 1.0);
+    private static final Point2D POINT2 = new Point2D(0.2, 0.2);
     private final KdTree kd = new KdTree();
-    private final static Point2D POINT1 = new Point2D(1.0, 1.0);
-    private final static Point2D POINT2 = new Point2D(0.2, 0.2);
 
     /**
      * Test method for {@link KdTree#isEmpty()}.

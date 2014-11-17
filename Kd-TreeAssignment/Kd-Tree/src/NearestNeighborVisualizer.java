@@ -1,13 +1,13 @@
 /*************************************************************************
- *  Compilation:  javac NearestNeighborVisualizer.java
- *  Execution:    java NearestNeighborVisualizer input.txt
- *  Dependencies: PointSET.java KdTree.java Point2D.java In.java StdDraw.java
+ * Compilation: javac NearestNeighborVisualizer.java Execution: java
+ * NearestNeighborVisualizer input.txt Dependencies: PointSET.java KdTree.java
+ * Point2D.java In.java StdDraw.java
  *
- *  Read points from a file (specified as a command-line argument) and
- *  draw to standard draw. Highlight the closest point to the mouse.
+ * Read points from a file (specified as a command-line argument) and draw to
+ * standard draw. Highlight the closest point to the mouse.
  *
- *  The nearest neighbor according to the brute-force algorithm is drawn
- *  in red; the nearest neighbor using the kd-tree algorithm is drawn in blue.
+ * The nearest neighbor according to the brute-force algorithm is drawn in red;
+ * the nearest neighbor using the kd-tree algorithm is drawn in blue.
  *
  *************************************************************************/
 
@@ -36,6 +36,7 @@ public class NearestNeighborVisualizer {
             double x = StdDraw.mouseX();
             double y = StdDraw.mouseY();
             Point2D query = new Point2D(x, y);
+            System.out.println(query.toString());
 
             // draw all of the points
             StdDraw.clear();

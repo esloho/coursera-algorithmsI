@@ -222,21 +222,25 @@ public class KdTree {
     private Iterable<Point2D> range(Node n, Stack<Point2D> pointsInRange,
             RectHV rect) {
 
-        if (rect.contains(n.p)) {
-            pointsInRange.push(n.p);
-        }
+        if (n != null) {
+            if (rect.contains(n.p)) {
+                pointsInRange.push(n.p);
+            }
 
-        // check if rectangle intersects with line instead (obtained like in
-        // draw)
+            // check if rectangle intersects with line instead (obtained like in
+            // draw)
 
-        // Look left only if left node rectangle intersects with the given one
-        if (n.lb != null && rect.intersects(n.lb.rect)) {
-            range(n.lb, pointsInRange, rect);
-        }
+            // Look left only if left node rectangle intersects with the given
+            // one
+            if (n.lb != null && rect.intersects(n.lb.rect)) {
+                range(n.lb, pointsInRange, rect);
+            }
 
-        // Look right only if right node rectangle intersects with the given one
-        if (n.rt != null && rect.intersects(n.rt.rect)) {
-            range(n.rt, pointsInRange, rect);
+            // Look right only if right node rectangle intersects with the given
+            // one
+            if (n.rt != null && rect.intersects(n.rt.rect)) {
+                range(n.rt, pointsInRange, rect);
+            }
         }
 
         return pointsInRange;
@@ -254,7 +258,9 @@ public class KdTree {
     }
 
     private Point2D nearest(Node n, boolean vertical, Point2D p,
-            Point2D champion) {
+            Point2D oldChampion) {
+
+        Point2D champion = oldChampion;
 
         if (n != null) {
             if (champion != null) {
@@ -279,13 +285,15 @@ public class KdTree {
                     // from the point of interest to the best point so far is
                     // greater than the distance from the point of interest to
                     // the line passing through the point in the node.
-                    if (p.distanceSquaredTo(champion) > p.distanceTo(refPoint)) {
+                    if (p.distanceSquaredTo(champion) > p
+                            .distanceSquaredTo(refPoint)) {
                         champion = nearest(n.rt, !vertical, p, champion);
                     }
                 } else { // The point is on right side of the division
                     champion = nearest(n.rt, !vertical, p, champion);
 
-                    if (p.distanceSquaredTo(champion) > p.distanceTo(refPoint)) {
+                    if (p.distanceSquaredTo(champion) > p
+                            .distanceSquaredTo(refPoint)) {
                         champion = nearest(n.lb, !vertical, p, champion);
                     }
                 }
@@ -296,13 +304,15 @@ public class KdTree {
                     // The point is on the bottom side of the division
                     champion = nearest(n.lb, !vertical, p, champion);
 
-                    if (p.distanceSquaredTo(champion) > p.distanceTo(refPoint)) {
+                    if (p.distanceSquaredTo(champion) > p
+                            .distanceSquaredTo(refPoint)) {
                         champion = nearest(n.rt, !vertical, p, champion);
                     }
                 } else { // The point is on the top side of the division
                     champion = nearest(n.rt, !vertical, p, champion);
 
-                    if (p.distanceSquaredTo(champion) > p.distanceTo(refPoint)) {
+                    if (p.distanceSquaredTo(champion) > p
+                            .distanceSquaredTo(refPoint)) {
                         champion = nearest(n.lb, !vertical, p, champion);
                     }
                 }
@@ -312,7 +322,31 @@ public class KdTree {
         return champion;
     }
 
+    // Some testing
     public static void main(String[] args) {
-        // Requested by the course API.
+        String filename = args[0];
+        In in = new In(filename);
+
+        // StdDraw.show(0);
+
+        KdTree kdtree = new KdTree();
+        while (!in.isEmpty()) {
+            double x = in.readDouble();
+            double y = in.readDouble();
+            Point2D p = new Point2D(x, y);
+            kdtree.insert(p);
+        }
+
+        kdtree.draw();
+
+        // // draw in blue the nearest neighbor (using kd-tree algorithm)
+        // StdDraw.setPenColor(StdDraw.BLUE);
+        final Point2D query = new Point2D(0.607421875, 0.42695312500000004);
+        final Point2D nearest = kdtree.nearest(query);
+        // kdtree.nearest(query).draw();
+        System.out.println("Nearest point to the query by Kd-Tree: "
+                + nearest.toString());
+
+        StdDraw.show(0);
     }
 }

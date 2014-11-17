@@ -106,7 +106,27 @@ public class PointSET {
         return champion;
     }
 
+    // Some testing
     public static void main(String[] args) {
-        // Requested by the course API.
+        String filename = args[0];
+        In in = new In(filename);
+
+        PointSET brute = new PointSET();
+
+        while (!in.isEmpty()) {
+            double x = in.readDouble();
+            double y = in.readDouble();
+            Point2D p = new Point2D(x, y);
+            brute.insert(p);
+        }
+
+        // // draw in blue the nearest neighbor (using kd-tree algorithm)
+        // StdDraw.setPenColor(StdDraw.BLUE);
+        final Point2D query = new Point2D(0.607421875, 0.42695312500000004);
+        final Point2D nearest = brute.nearest(query);
+        // kdtree.nearest(query).draw();
+        System.out.println("Nearest point to the query by brute force: "
+                + nearest.toString());
     }
+
 }
